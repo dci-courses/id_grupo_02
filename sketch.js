@@ -3,7 +3,7 @@ let img;
 let label = "";
 let confidence = "";
 
-
+//probanding
 function preload() {
     classifier = ml5.imageClassifier("MobileNet");
     img = loadImage("images/azul.png")
