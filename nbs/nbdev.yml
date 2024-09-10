@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "id_grupo_02"
+  site-url: "https://dci-courses.github.io/id_grupo_02"
+  description: "GRUPO DOS INGENIERIA DE DATOS"
+  repo-branch: master
+  repo-url: "https://github.com/dci-courses/id_grupo_02"
