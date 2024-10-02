@@ -2,13 +2,26 @@
 title: "01.- Presentacion proyecto"
 format: html
 ---
-
+---
 # Colored eyes
 
-##  GRUPO DOS 
+### Problematica
 
+Las personas con discapacidad visual enfrentan dificultades significativas al identificar y clasificar colores en objetos cotidianos como ropa, alimentos o accesorios. Esta limitación puede afectar su capacidad para tomar decisiones y realizar tareas diarias de forma autónoma, dependiendo muchas veces de la asistencia de otras personas o de tecnologías que no siempre están adaptadas específicamente para sus necesidades.
+
+### Solucion
+
+Colored Eyes es una aplicación diseñada para resolver este problema, utilizando la cámara del dispositivo para identificar y clasificar colores en tiempo real. Al acercar un objeto a la cámara, la aplicación detecta su color y lo muestra en pantalla, con la posibilidad de ser leído por asistentes de voz. Además, cuenta con una interfaz sencilla y comandos de voz, lo que facilita su uso para personas ciegas, promoviendo su autonomía en actividades diarias mediante la tecnología.
+
+<center>
+![Papelografo proyecto](colored-eyes/colored-eyes-paper.jpeg)
+</center>
+
+##  Grupo dos
 - Camila Infante 
 - Carlos Peña 
+
+
 
 
  

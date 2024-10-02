@@ -2,3 +2,6 @@ website:
   sidebar:
     contents:
       - index.qmd
+      - section: 02 Colored eyes
+        contents:
+          - 02 Colored eyes/colored_eyes.qmd

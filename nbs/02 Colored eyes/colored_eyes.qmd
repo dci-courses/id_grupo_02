@@ -1,0 +1,138 @@
+---
+title: "Colored Eyes"
+description: Demo del proyecto
+format: html
+---
+Dejar el objeto frente a la camara por 5 segundos.
+<div id="p5-sketch">
+  <div id="canvas-container" class="test"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
+<script src="https://unpkg.com/ml5@0.12.2/dist/ml5.min.js"></script>
+
+<script>
+  (function () {
+    const modelURL =
+      "https://teachablemachine.withgoogle.com/models/eHnTyLcPp/";
+    let video,
+      classifier,
+      label = "",
+      classifyTimeout,
+      isClassifying = false;
+    const colorMap = {
+      Naranjo: "Naranjo",
+      Verde: "Verde",
+      Amarillo: "Amarillo",
+      Celeste: "Celeste",
+      Azul: "Azul",
+      Morado: "Morado",
+      Rojo: "Rojo",
+      Negro: "Negro",
+      Gris: "Gris",
+      Blanco: "Blanco",
+      Rosado: "Rosado",
+    };
+
+    const sketch = (p) => {
+      p.preload = () => {
+        classifier = ml5.imageClassifier(modelURL);
+      };
+
+      p.setup = () => {
+        p.createCanvas(700, 600).parent("canvas-container");
+        createButtons();
+        createVideoCapture();
+        p.classifyVideo();
+      };
+
+      p.classifyVideo = function () {
+        classifier.classify(video, p.gotResults);
+      };
+
+      p.draw = () => {
+        p.background(255);
+        p.image(video, 50, 0);
+        displayLabel();
+      };
+
+      function displayLabel() {
+        p.textSize(100);
+        p.textAlign(p.CENTER, p.CENTER);
+        const color = colorMap[label] || "";
+        p.text(color, p.width / 2, 550);
+      }
+
+      p.gotResults = (error, results) => {
+        if (error) {
+          console.error(error);
+          return;
+        }
+        label = results[0].label;
+        if (isClassifying) {
+          p.classifyVideo();
+        }
+      };
+
+      function createButtons() {
+        const classifyButton = createStyledButton(
+          "Clasificar Color",
+          startClassification
+        );
+        const resetButton = createStyledButton(
+          "Actualizar Cámara",
+          resetCamera
+        );
+
+        classifyButton.parent("canvas-container");
+        resetButton.parent("canvas-container");
+      }
+
+      function createStyledButton(label, onClick) {
+        const button = p.createButton(label);
+        button.class("button");
+        button.size(300, 50);
+        button.mousePressed(onClick);
+        return button;
+      }
+      function createVideoCapture() {
+        video = p.createCapture(p.VIDEO);
+        video.size(650, 480);
+        video.hide();
+      }
+      function startClassification() {
+        if (!isClassifying) {
+          isClassifying = true;
+          p.classifyVideo();
+          classifyTimeout = setTimeout(stopClassification, 5000);
+        }
+      }
+
+      function stopClassification() {
+        isClassifying = false;
+        clearTimeout(classifyTimeout);
+        speak(label);
+      }
+
+      function speak(text) {
+        if ("speechSynthesis" in window) {
+          const msg = new SpeechSynthesisUtterance(text);
+          msg.lang = "es-ES";
+          window.speechSynthesis.speak(msg);
+        } else {
+          console.error("Speech synthesis not supported");
+        }
+      }
+
+      function resetCamera() {
+        video.remove();
+        createVideoCapture();
+        p.classifyVideo();
+      }
+    };
+
+    new p5(sketch);
+  })();
+</script>
