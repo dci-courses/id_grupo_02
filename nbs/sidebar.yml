@@ -5,3 +5,6 @@ website:
       - section: 02 Colored eyes
         contents:
           - 02 Colored eyes/colored_eyes.qmd
+      - section: 03 API Extractor
+        contents:
+          - 03 API Extractor/reddit.ipynb
