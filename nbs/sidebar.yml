@@ -8,3 +8,7 @@ website:
       - section: 03 API Extractor
         contents:
           - 03 API Extractor/reddit.ipynb
+          - 03 API Extractor/reddit2.ipynb
+      - section: 04 MP3
+        contents:
+          - 04 MP3/mp3.ipynb
